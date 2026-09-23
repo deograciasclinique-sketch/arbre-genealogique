@@ -122,7 +122,7 @@ export const FamilyTreeCanvas: React.FC<FamilyTreeCanvasProps> = ({
   }, [focusMember, members]);
 
   return (
-    <div className="relative w-full h-[calc(100vh-5rem)] flex flex-col bg-[#faf8f5] overflow-hidden">
+    <div className="relative w-full h-[calc(100dvh-4rem)] sm:h-[calc(100dvh-5rem)] flex flex-col bg-[#faf8f5] overflow-hidden">
       {/* Top Floating Control Bar */}
       <div className="p-3 sm:p-4 bg-white/90 backdrop-blur border-b border-stone-200/80 z-20 flex flex-wrap items-center justify-between gap-3 shadow-xs">
         {/* Left: View Mode Toggle & Search */}

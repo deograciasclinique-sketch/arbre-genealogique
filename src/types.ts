@@ -1,5 +1,13 @@
 export type Gender = 'M' | 'F' | 'other';
 
+export type UnionStatus = 'married' | 'union_libre' | 'unspecified';
+
+export const UNION_STATUS_LABELS: Record<UnionStatus, string> = {
+  married: 'Marié(e) légalement',
+  union_libre: 'Union libre / Concubinage',
+  unspecified: 'Non précisé',
+};
+
 export interface FamilyMember {
   id: string;
   firstName: string;
@@ -15,6 +23,7 @@ export interface FamilyMember {
   currentResidence?: string;
   parentIds: string[]; // IDs of parents
   spouseId?: string; // ID of spouse/partner
+  unionStatus?: UnionStatus; // Statut légal de l'union avec le conjoint
   childrenIds: string[]; // IDs of children
   notes?: string;
   generation?: number; // Calculated or assigned generation (0 = root/oldest, 1, 2, 3...)

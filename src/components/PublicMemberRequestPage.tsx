@@ -93,7 +93,7 @@ export const PublicMemberRequestPage: React.FC<PublicMemberRequestPageProps> = (
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center px-4 py-8 sm:py-14">
+    <div className="min-h-[100dvh] flex flex-col items-center px-4 py-8 sm:py-14">
       <div className="w-full max-w-lg">
         <div className="flex flex-col items-center text-center mb-6">
           <div className="w-12 h-12 rounded-full bg-stone-900 flex items-center justify-center text-[#c9a24b] border border-[#a8791f]/40 mb-3">

@@ -248,11 +248,11 @@ function MainApp() {
       updatedMembers = updatedMembers.map((m) => {
         // If this member is the newly assigned spouse
         if (savedMember.spouseId === m.id) {
-          return { ...m, spouseId: savedMember.id };
+          return { ...m, spouseId: savedMember.id, unionStatus: savedMember.unionStatus };
         }
         // If this member had this person as spouse, but spouse changed
         if (m.spouseId === savedMember.id && savedMember.spouseId !== m.id) {
-          return { ...m, spouseId: undefined };
+          return { ...m, spouseId: undefined, unionStatus: undefined };
         }
 
         // If this member is listed in parentIds of savedMember, ensure childrenIds contains savedMember
@@ -455,7 +455,7 @@ function MainApp() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col text-stone-800 font-sans selection:bg-amber-100 selection:text-amber-900">
+    <div className="min-h-[100dvh] flex flex-col text-stone-800 font-sans selection:bg-amber-100 selection:text-amber-900">
       {/* Top Navbar */}
       <Navbar
         activeTab={activeTab}

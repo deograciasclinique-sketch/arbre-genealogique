@@ -61,7 +61,7 @@ const CreateCodeScreen: React.FC<{ onCreated: () => void }> = ({ onCreated }) =>
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-10">
+    <div className="min-h-[100dvh] flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-sm">
         <div className="flex flex-col items-center text-center mb-6">
           <div className="w-12 h-12 rounded-full bg-stone-900 flex items-center justify-center text-[#c9a24b] border border-[#a8791f]/40 mb-3">
@@ -153,7 +153,7 @@ const LockScreen: React.FC<{ onUnlocked: () => void }> = ({ onUnlocked }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-10">
+    <div className="min-h-[100dvh] flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-sm">
         <div className="flex flex-col items-center text-center mb-6">
           <div className="w-12 h-12 rounded-full bg-stone-900 flex items-center justify-center text-[#c9a24b] border border-[#a8791f]/40 mb-3">

@@ -8,6 +8,13 @@
 }
 
 @layer base {
+  html, body {
+    /* Empêche le "rebond" élastique de la page sur mobile (iOS/Android),
+       qui donne l'impression que l'écran bouge tout seul en dehors des
+       zones prévues pour défiler (l'arbre, la carte...). */
+    overscroll-behavior-y: none;
+  }
+
   body {
     font-family: 'Outfit', system-ui, -apple-system, sans-serif;
     background-color: #f7f3ec;

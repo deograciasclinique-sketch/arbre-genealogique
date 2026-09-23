@@ -425,7 +425,7 @@ export const FamilyMapView: React.FC<FamilyMapViewProps> = ({
   }, [members]);
 
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)] sm:h-[calc(100vh-5rem)] bg-stone-100 overflow-hidden">
+    <div className="flex flex-col h-[calc(100dvh-4rem)] sm:h-[calc(100dvh-5rem)] bg-stone-100 overflow-hidden">
       {/* Top Filter & Control Bar */}
       <div className="bg-white/95 backdrop-blur-md border-b border-stone-200 px-4 sm:px-6 py-3 z-10 shadow-xs">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-3">

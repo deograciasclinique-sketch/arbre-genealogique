@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FamilyMember, Gender } from '../types';
+import { FamilyMember, Gender, UnionStatus, UNION_STATUS_LABELS } from '../types';
 import { CameraPhotoCapture } from './CameraPhotoCapture';
 import {
   X,
@@ -54,6 +54,9 @@ export const MemberFormModal: React.FC<MemberFormModalProps> = ({
   const [spouseId, setSpouseId] = useState(
     initialMember?.spouseId || presetSpouseId || ''
   );
+  const [unionStatus, setUnionStatus] = useState<UnionStatus>(
+    initialMember?.unionStatus || 'unspecified'
+  );
 
   const [photoMode, setPhotoMode] = useState<'camera-upload' | 'url'>('camera-upload');
 
@@ -86,6 +89,7 @@ export const MemberFormModal: React.FC<MemberFormModalProps> = ({
       bio: bio.trim() || undefined,
       parentIds,
       spouseId: spouseId || undefined,
+      unionStatus: spouseId ? unionStatus : undefined,
       childrenIds: initialMember?.childrenIds || [],
     };
 
@@ -375,10 +379,10 @@ export const MemberFormModal: React.FC<MemberFormModalProps> = ({
               <span>Liens de Parenté</span>
             </h4>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-semibold text-stone-600 mb-1">
-                  Parent 1
+                  Papa
                 </label>
                 <select
                   value={parent1Id}
@@ -386,37 +390,61 @@ export const MemberFormModal: React.FC<MemberFormModalProps> = ({
                   className="w-full px-2.5 py-2 text-xs bg-white border border-stone-200 rounded-xl focus:outline-none"
                 >
                   <option value="">-- Aucun --</option>
-                  {availableMembers.map((m) => (
-                    <option key={m.id} value={m.id}>
-                      {m.firstName} {m.lastName}
-                    </option>
-                  ))}
+                  {availableMembers
+                    .filter((m) => m.id !== parent2Id && m.gender !== 'F')
+                    .map((m) => (
+                      <option key={m.id} value={m.id}>
+                        {m.firstName} {m.lastName}
+                      </option>
+                    ))}
+                  {availableMembers.some((m) => m.id !== parent2Id && m.gender === 'F') && (
+                    <optgroup label="Autres membres">
+                      {availableMembers
+                        .filter((m) => m.id !== parent2Id && m.gender === 'F')
+                        .map((m) => (
+                          <option key={m.id} value={m.id}>
+                            {m.firstName} {m.lastName}
+                          </option>
+                        ))}
+                    </optgroup>
+                  )}
                 </select>
               </div>
 
               <div>
                 <label className="block text-xs font-semibold text-stone-600 mb-1">
-                  Parent 2
+                  Maman
                 </label>
                 <select
                   value={parent2Id}
                   onChange={(e) => setParent2Id(e.target.value)}
                   className="w-full px-2.5 py-2 text-xs bg-white border border-stone-200 rounded-xl focus:outline-none"
                 >
-                  <option value="">-- Aucun --</option>
+                  <option value="">-- Aucune --</option>
                   {availableMembers
-                    .filter((m) => m.id !== parent1Id)
+                    .filter((m) => m.id !== parent1Id && m.gender !== 'M')
                     .map((m) => (
                       <option key={m.id} value={m.id}>
                         {m.firstName} {m.lastName}
                       </option>
                     ))}
+                  {availableMembers.some((m) => m.id !== parent1Id && m.gender === 'M') && (
+                    <optgroup label="Autres membres">
+                      {availableMembers
+                        .filter((m) => m.id !== parent1Id && m.gender === 'M')
+                        .map((m) => (
+                          <option key={m.id} value={m.id}>
+                            {m.firstName} {m.lastName}
+                          </option>
+                        ))}
+                    </optgroup>
+                  )}
                 </select>
               </div>
 
               <div>
                 <label className="block text-xs font-semibold text-stone-600 mb-1">
-                  Conjoint / Époux
+                  Conjoint(e) / Époux(se)
                 </label>
                 <select
                   value={spouseId}
@@ -431,6 +459,25 @@ export const MemberFormModal: React.FC<MemberFormModalProps> = ({
                   ))}
                 </select>
               </div>
+
+              {spouseId && (
+                <div>
+                  <label className="block text-xs font-semibold text-stone-600 mb-1">
+                    Statut de l'union
+                  </label>
+                  <select
+                    value={unionStatus}
+                    onChange={(e) => setUnionStatus(e.target.value as UnionStatus)}
+                    className="w-full px-2.5 py-2 text-xs bg-white border border-stone-200 rounded-xl focus:outline-none"
+                  >
+                    {(Object.keys(UNION_STATUS_LABELS) as UnionStatus[]).map((status) => (
+                      <option key={status} value={status}>
+                        {UNION_STATUS_LABELS[status]}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
             </div>
           </div>
 

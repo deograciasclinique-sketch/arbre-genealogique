@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { FamilyMember, FamilyEvent, calculateAge, EVENT_TYPE_INFO } from '../types';
+import { FamilyMember, FamilyEvent, calculateAge, EVENT_TYPE_INFO, UNION_STATUS_LABELS } from '../types';
 import { getMemberRelations } from '../utils/treeUtils';
 import { photoOrPlaceholder } from '../utils/avatarUtils';
 import {
@@ -252,7 +252,7 @@ export const MemberProfileModal: React.FC<MemberProfileModalProps> = ({
             {/* Spouse */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <p className="text-[11px] font-semibold text-stone-500">Conjoint / Époux</p>
+                <p className="text-[11px] font-semibold text-stone-500">Conjoint(e) / Époux(se)</p>
                 {!relations.spouse && (
                   <button
                     onClick={() => onAddSpouse(member)}
@@ -263,20 +263,25 @@ export const MemberProfileModal: React.FC<MemberProfileModalProps> = ({
                 )}
               </div>
               {relations.spouse ? (
-                <button
-                  onClick={() => onSelectRelative(relations.spouse!)}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-900 text-xs font-medium border border-rose-200 transition-colors"
-                >
-                  <Heart className="w-4 h-4 fill-rose-400 text-rose-500" />
-                  <img
-                    src={photoOrPlaceholder(relations.spouse.photoUrl)}
-                    alt={relations.spouse.firstName}
-                    className="w-6 h-6 rounded-full object-cover"
-                  />
-                  <span>
-                    {relations.spouse.firstName} {relations.spouse.lastName}
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    onClick={() => onSelectRelative(relations.spouse!)}
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-900 text-xs font-medium border border-rose-200 transition-colors"
+                  >
+                    <Heart className="w-4 h-4 fill-rose-400 text-rose-500" />
+                    <img
+                      src={photoOrPlaceholder(relations.spouse.photoUrl)}
+                      alt={relations.spouse.firstName}
+                      className="w-6 h-6 rounded-full object-cover"
+                    />
+                    <span>
+                      {relations.spouse.firstName} {relations.spouse.lastName}
+                    </span>
+                  </button>
+                  <span className="text-[11px] text-stone-500 italic">
+                    {UNION_STATUS_LABELS[member.unionStatus || 'unspecified']}
                   </span>
-                </button>
+                </div>
               ) : (
                 <p className="text-xs text-stone-400 italic">Non marié(e) ou non renseigné</p>
               )}
