@@ -1,0 +1,69 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  --gold: #a8791f;
+  --gold-deep: #8a6317;
+  --ink: #1c1917;
+}
+
+@layer base {
+  body {
+    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+    background-color: #f7f3ec;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(168, 121, 31, 0.07), transparent),
+      radial-gradient(circle at 100% 0%, rgba(28, 25, 23, 0.03), transparent 40%),
+      radial-gradient(circle at 0% 100%, rgba(28, 25, 23, 0.03), transparent 40%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, .font-serif {
+    font-family: 'Cinzel', Georgia, serif;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* Elegant, low-key card surface used across the app */
+.card-elegant {
+  background: linear-gradient(180deg, #ffffff 0%, #fdfbf7 100%);
+  border: 1px solid rgba(28, 25, 23, 0.08);
+  box-shadow:
+    0 1px 2px rgba(28, 25, 23, 0.04),
+    0 8px 24px -12px rgba(28, 25, 23, 0.12);
+}
+
+.card-elegant:hover {
+  box-shadow:
+    0 2px 4px rgba(28, 25, 23, 0.05),
+    0 16px 32px -14px rgba(168, 121, 31, 0.22);
+}
+
+/* Thin gold hairline used to separate premium sections */
+.hairline-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(168, 121, 31, 0.5), transparent);
+}
+
+/* Custom leaflet marker styling */
+.leaflet-container {
+  font-family: 'Outfit', system-ui, -apple-system, sans-serif !important;
+  z-index: 1 !important;
+}
+
+.custom-map-marker {
+  background: transparent;
+  border: none;
+}
+
+@media print {
+  header, nav, button, .no-print {
+    display: none !important;
+  }
+
+  body {
+    background-color: white !important;
+    background-image: none !important;
+    color: black !important;
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Arbre Généalogique & Chronologie Familiale",
+  "description": "Créez votre arbre généalogique interactif avec photos, nom, prénom, âge et chronologie des événements familiaux marquants.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
